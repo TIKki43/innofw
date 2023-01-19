@@ -1,0 +1,23 @@
+name: Segmentation
+description: 0.4 * focal_loss + 0.8 * dice_loss + surface_loss 
+task:
+  - image-segmentation
+
+implementations:
+  torch:
+    DiceLoss:
+      weight: 0.8
+      object:
+        _target_: innofw.core.losses.diceloss_old.DiceLoss
+        gamma: 1
+    FocalLoss:
+      weight: 0.4
+      object:
+        _target_: innofw.core.losses.focalloss_old.FocalLoss
+        gamma: 2 
+    SurfaceLoss:
+      weight: 1
+      object:
+        _target_: innofw.core.losses.surfaceloss_old.SurfaceLoss
+        activation: sigmoid
+
